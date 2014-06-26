@@ -1,0 +1,1 @@
+;If the interpreter uses applicative-order evaluation it will get stuck in an infinite loop before being able to return 0 because the (p) will be evaluated before the (= x 0) test can tell it is not needed. If normal-order evaluation would be used, then the procedure would return 0 and then end, the (p) expression will never be evaluated. 

@@ -1,0 +1,1 @@
+She can't define if as an ordinary cond because as soon as the new-if is called all arguments will be evaluated due to the applicative-order evaluation, causing the procedure to get stuck in an infinite loop. sqrt-iter will call itself over and over again. 

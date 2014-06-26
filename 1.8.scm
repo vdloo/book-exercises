@@ -1,30 +1,30 @@
 ; Newton's method for cube roots
 (define (bettercube x y)
-	(/	(+	(/	x
-							(square y)
-					)
-					(+ y y)
-			)
-			3
-	)
+  (/	(+	(/	x
+              (square y)
+          )
+          (+ y y)
+      )
+      3
+   )
 )
 
 (define (good-enough x y)
-	(< 
-		(abs (- x y))
-		0.1
-	)
+  (< 
+    (abs (- x y))
+    0.1
+  )
 )
 
 (define (cube-iter x y yprev)
-	(if (good-enough y yprev)
-			y
-			(cube-iter x (bettercube x y) y)
-	)
+  (if (good-enough y yprev)
+    y
+    (cube-iter x (bettercube x y) y)
+  )
 ) 
 
 (define (cuberoot x)
-	(cube-iter x 1.0 0)
+  (cube-iter x 1.0 0)
 )
 
 (cuberoot 2)			;	1.2599 	procedure returns 1.2638888888888888

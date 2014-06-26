@@ -1,17 +1,17 @@
 (define (square x) (* x x))
 ; if x is at least bigger than one of the others return the square of x, else 0
 (define (input x y z)
-  	(if (or (> x y) (> x z))
-		(square x)
-		0
-	)
+  (if (or (> x y) (> x z))
+      (square x)
+      0
+  )
 )
 ; run input in three different orders
 (define (procedure x y z) 
-  	(+ (input x y z)
-	   (input y x z)
-	   (input z y x)
-	)
+  (+ (input x y z)
+    (input y x z)
+    (input z y x)
+  )
 )
 
 (procedure 1 2 3) ; should be 4 + 9 = 13

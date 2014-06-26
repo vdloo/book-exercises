@@ -11,20 +11,22 @@
 
 (define (good-enough x y)
 	(< 
-		(- (bettercube x y) x)
-		0.001
+		(abs (- x y))
+		0.1
 	)
 )
 
-(define (cube-iter x y)
-	(if	(good-enough x y)
-			(bettercube x y)
-			x
+(define (cube-iter x y yprev)
+	(if (good-enough y yprev)
+			y
+			(cube-iter x (bettercube x y) y)
 	)
-)
+) 
 
 (define (cuberoot x)
-	(cube-iter x 1)
+	(cube-iter x 1.0 0)
 )
 
-(cuberoot 81) ; 9
+(cuberoot 2)			;	1.2599 	procedure returns 1.2638888888888888
+(cuberoot 27) 		; 3				procedure returns 3.001274406506175
+(cuberoot 200000) ; 58.480	procedure returns 58.4803547787669

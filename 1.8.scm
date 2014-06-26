@@ -27,6 +27,6 @@
   (cube-iter x 1.0 0)
 )
 
-(cuberoot 2)      ;	1.2599  procedure returns 1.2638888888888888
+(cuberoot 2)      ; 1.2599  procedure returns 1.2638888888888888
 (cuberoot 27)     ; 3       procedure returns 3.001274406506175
 (cuberoot 200000) ; 58.480  procedure returns 58.4803547787669

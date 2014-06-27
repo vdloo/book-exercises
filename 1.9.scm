@@ -15,6 +15,7 @@
 ; (inc (inc (+ 2 5)))
 ; (inc (inc (inc (+ (dec 2) 5))))
 ; (inc (inc (inc (+ 1 5))))
+; (inc (inc (inc (inc (+ (dec 1) 5)))))
 ; (inc (inc (inc (inc (+ 0 5)))))
 ; (inc (inc (inc (inc 5))))
 ; (inc (inc (inc 6)))

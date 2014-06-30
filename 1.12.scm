@@ -27,7 +27,7 @@
 )
 (pascal 16)
 
-; bonus: finding pascals number with the use of combinatorics (and in the form of an iterative process)
+; bonus: finding elements of Pascal's triangle with the use of combinatorics (and in the form of an iterative process)
 ; n!/(r!(n-r)!) where n is the rownumber and r is the element in the row (both starting with 0)
 (define (fact-iter n result)
   (if (> n 1)

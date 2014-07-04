@@ -1,12 +1,11 @@
 \documentclass{12pt}{article}
 \usepackage{amsmath}
-\DeclareMathOperator{\Fib}{Fib}
 \begin{document}
-Given: $ Fib(n) = Fib(n - 1) + Fib(n - 2) $,  $ \phi^2 = \phi + 1 $ and $ \phi = \frac{1 + \sqrt{5}}{2} $
+Given: $ f(n) = f(n - 1) + f(n - 2) $,  $ \phi^2 = \phi + 1 $ and $ \phi = \frac{1 + \sqrt{5}}{2} $
 
 Let $ \psi = \frac{1-\sqrt{5}}{2} $
 
-Prove with induction that $ Fib(n) = Fib(n - 1) + Fib(n - 2) = \frac{(\phi^n-\psi^n)}{\sqrt{5}} $
+Prove with induction that $ f(n) = f(n - 1) + f(n - 2) = \frac{(\phi^n-\psi^n)}{\sqrt{5}} $
 
 We know that $ \phi^2 = \phi + 1$ and that $\psi = \frac{1-\sqrt{5}}{2}$, so $\psi^2 = (\frac{1-\sqrt{5}}{2})^2 $
 
@@ -14,19 +13,19 @@ $ \psi^2 = (\frac{1-\sqrt{5}}{2})^2 = (\frac{1-\sqrt{5}}{2})(\frac{1-\sqrt{5}}{2
 
 Now we know that not only $ \phi^2 = \phi + 1$ but similarly $\psi^2 = \psi + 1 $
 
-$ Fib(0): \frac{(\phi^0-\psi^0)}{\sqrt{5}} = \frac{0}{\sqrt{5}} = 0 $
+$ f(0): \frac{(\phi^0-\psi^0)}{\sqrt{5}} = \frac{0}{\sqrt{5}} = 0 $
 
-$ Fib(1): \frac{(\phi^1-\psi^1)}{\sqrt{5}} = \frac{\frac{1 + \sqrt{5}}{2} - \frac{1 - \sqrt{5}}{2}}{\sqrt{5}} = \frac{\frac{1}{2} + \frac{1}{2}\sqrt{5} - \frac{1}{2} + \frac{1}{2}\sqrt{5}}{\sqrt{5}} = \frac{\sqrt{5}}{\sqrt{5}} = 1 $
+$ f(1): \frac{(\phi^1-\psi^1)}{\sqrt{5}} = \frac{\frac{1 + \sqrt{5}}{2} - \frac{1 - \sqrt{5}}{2}}{\sqrt{5}} = \frac{\frac{1}{2} + \frac{1}{2}\sqrt{5} - \frac{1}{2} + \frac{1}{2}\sqrt{5}}{\sqrt{5}} = \frac{\sqrt{5}}{\sqrt{5}} = 1 $
 
-$ Fib(2): \frac{(\phi^2-\psi^2)}{\sqrt{5}} = \frac{(\phi + 1) - (\psi + 1)}{\sqrt{5}} = \frac{\frac{1 + \sqrt{5}}{2} - \frac{1 - \sqrt{5}}{2} - 1 + 1}{\sqrt{5}} = \frac{\frac{1 + \sqrt{5} - (1 - \sqrt{5})}{2}}{\sqrt{5}} = \frac{\sqrt{5}}{\sqrt{5}} = 1 $
+$ f(2): \frac{(\phi^2-\psi^2)}{\sqrt{5}} = \frac{(\phi + 1) - (\psi + 1)}{\sqrt{5}} = \frac{\frac{1 + \sqrt{5}}{2} - \frac{1 - \sqrt{5}}{2} - 1 + 1}{\sqrt{5}} = \frac{\frac{1 + \sqrt{5} - (1 - \sqrt{5})}{2}}{\sqrt{5}} = \frac{\sqrt{5}}{\sqrt{5}} = 1 $
 
-$ Fib(n): Fib(n - 1) + Fib(n - 2) = \frac{(\phi^n-\psi^n)}{\sqrt{5}} $
+Given $ n + 1 $, assume $ f(k): f(k - 1) + f(k - 2) = \frac{(\phi^k-\psi^k)}{\sqrt{5}} $ for all $ k \leq n $
 
-$ Fib(n+1): \frac{\phi^n - \psi^n}{\sqrt{5}} + \frac{\phi^{n - 1} - \psi^{n - 1}}{\sqrt{5}} = \frac{\phi^n + \phi^{n - 1} - \psi^n - \psi^{n - 1}}{\sqrt{5}} = \frac{\phi^{n + 1}(\phi^{-1} + \phi^{-2}) - \psi^{n + 1}(\psi^{-1} + \psi^{-2})}{\sqrt{5}} = \frac{\phi^{n + 1}\phi^{-1}(1 + \phi^{-1}) - \psi^{n + 1}\psi^{-1}(1 + \psi^{-1})}{\sqrt{5}} = \frac{\phi^{n + 1}\phi^{-1}\phi - \psi^{n + 1}\psi^{-1}\psi}{\sqrt{5}} = \frac{\phi^{n + 1} - \psi^{n + 1}}{\sqrt{5}} $
+$ f(n+1): \frac{\phi^n - \psi^n}{\sqrt{5}} + \frac{\phi^{n - 1} - \psi^{n - 1}}{\sqrt{5}} = \frac{\phi^n + \phi^{n - 1} - \psi^n - \psi^{n - 1}}{\sqrt{5}} = \frac{\phi^{n + 1}(\phi^{-1} + \phi^{-2}) - \psi^{n + 1}(\psi^{-1} + \psi^{-2})}{\sqrt{5}} = \frac{\phi^{n + 1}\phi^{-1}(1 + \phi^{-1}) - \psi^{n + 1}\psi^{-1}(1 + \psi^{-1})}{\sqrt{5}} = \frac{\phi^{n + 1}\phi^{-1}\phi - \psi^{n + 1}\psi^{-1}\psi}{\sqrt{5}} = \frac{\phi^{n + 1} - \psi^{n + 1}}{\sqrt{5}} $
 
-Prove that $ Fib(n) $ is the closest integer to $ \frac{\phi^n}{\sqrt{5}} $, where $ \phi = \frac{(1 + \sqrt{5})}{2} $
+Prove that $ f(n) $ is the closest integer to $ \frac{\phi^n}{\sqrt{5}} $, where $ \phi = \frac{(1 + \sqrt{5})}{2} $
 
-If $ Fib(n) $ is the int closest to $ \frac{\phi^n}{\sqrt{5}} $, then $ (Fib(n) - \frac{\phi^n}{\sqrt{5}}) \leq \frac{1}{2} $
+If $ f(n) $ is the int closest to $ \frac{\phi^n}{\sqrt{5}} $, then $ (f(n) - \frac{\phi^n}{\sqrt{5}}) \leq \frac{1}{2} $
 
 $ \frac{(\phi^n-\psi^n)}{\sqrt{5}} - \frac{\phi^n}{\sqrt{5}} = \frac{-\psi^n}{\sqrt{5}} $
 

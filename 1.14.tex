@@ -2,8 +2,6 @@
 \usepackage{tikz}
 \usetikzlibrary{arrows}
 \usetikzlibrary{positioning}
-\usepackage{atbegshi}
-\AtBeginDocument{\AtBeginShipoutNext{\AtBeginShipoutDiscard}}
 \tikzset{
 	treenode/.style = {align=center, inner sep=2pt, text centered, rectangle, black, font=\sffamily\bfseries, draw=black, fill=white},
 	endright/.style = {draw=red},
@@ -11,6 +9,8 @@
 }
 
 \begin{document}
+The orders of growth for the count-change program are $ \Theta(n^5) $ because for every time the kinds-of-coins variable is be incremented, there will be approximately just as many new steps for every step that already existed. So if the count-change program had consisted of only three types of change, the order of growth would have been $ \Theta(n^3) $. $ \Theta(n^5) $ means that $ \Omega(n^5) $ and also $ \mathcal{O}(n^5) $.
+
 \hspace*{-4em}
 \begin{tikzpicture}[
 	level 1/.style={sibling distance = 3cm},

@@ -1,4 +1,4 @@
-\documentclass{12pt}{article}
+\documentclass{article}
 \usepackage{amsmath}
 \begin{document}
 Given: $ f(n) = f(n - 1) + f(n - 2) $,  $ \phi^2 = \phi + 1 $ and $ \phi = \frac{1 + \sqrt{5}}{2} $
@@ -9,7 +9,9 @@ Prove with induction that $ f(n) = f(n - 1) + f(n - 2) = \frac{(\phi^n-\psi^n)}{
 
 We know that $ \phi^2 = \phi + 1$ and that $\psi = \frac{1-\sqrt{5}}{2}$, so $\psi^2 = (\frac{1-\sqrt{5}}{2})^2 $
 
-$ \psi^2 = (\frac{1-\sqrt{5}}{2})^2 = (\frac{1-\sqrt{5}}{2})(\frac{1-\sqrt{5}}{2}) = \frac{(1-\sqrt{5})^2}{4} = \frac{6-2\sqrt5}{4} = \frac{3-\sqrt{5}}{2} = \frac{1-\sqrt{5}}{2} + 1 = \psi + 1 $
+$ \psi^2 = (\frac{1-\sqrt{5}}{2})^2 = (\frac{1-\sqrt{5}}{2})(\frac{1-\sqrt{5}}{2}) = \frac{(1-\sqrt{5})^2}{4} = \frac{6-2\sqrt5}{4} = \frac{3-\sqrt{5}}{2} = \frac{1-\sqrt{5}}{2} + 1 $
+
+$ = \psi + 1 $
 
 Now we know that not only $ \phi^2 = \phi + 1$ but similarly $\psi^2 = \psi + 1 $
 
@@ -21,7 +23,11 @@ $ f(2): \frac{(\phi^2-\psi^2)}{\sqrt{5}} = \frac{(\phi + 1) - (\psi + 1)}{\sqrt{
 
 Given $ n + 1 $, assume $ f(k): f(k - 1) + f(k - 2) = \frac{(\phi^k-\psi^k)}{\sqrt{5}} $ for all $ k \leq n $
 
-$ f(n+1): \frac{\phi^n - \psi^n}{\sqrt{5}} + \frac{\phi^{n - 1} - \psi^{n - 1}}{\sqrt{5}} = \frac{\phi^n + \phi^{n - 1} - \psi^n - \psi^{n - 1}}{\sqrt{5}} = \frac{\phi^{n + 1}(\phi^{-1} + \phi^{-2}) - \psi^{n + 1}(\psi^{-1} + \psi^{-2})}{\sqrt{5}} = \frac{\phi^{n + 1}\phi^{-1}(1 + \phi^{-1}) - \psi^{n + 1}\psi^{-1}(1 + \psi^{-1})}{\sqrt{5}} = \frac{\phi^{n + 1}\phi^{-1}\phi - \psi^{n + 1}\psi^{-1}\psi}{\sqrt{5}} = \frac{\phi^{n + 1} - \psi^{n + 1}}{\sqrt{5}} $
+$ f(n+1): \frac{\phi^n - \psi^n}{\sqrt{5}} + \frac{\phi^{n - 1} - \psi^{n - 1}}{\sqrt{5}} = \frac{\phi^n + \phi^{n - 1} - \psi^n - \psi^{n - 1}}{\sqrt{5}} $
+
+$ = \frac{\phi^{n + 1}(\phi^{-1} + \phi^{-2}) - \psi^{n + 1}(\psi^{-1} + \psi^{-2})}{\sqrt{5}} = \frac{\phi^{n + 1}\phi^{-1}(1 + \phi^{-1}) - \psi^{n + 1}\psi^{-1}(1 + \psi^{-1})}{\sqrt{5}} $
+
+$ = \frac{\phi^{n + 1}\phi^{-1}\phi - \psi^{n + 1}\psi^{-1}\psi}{\sqrt{5}} = \frac{\phi^{n + 1} - \psi^{n + 1}}{\sqrt{5}} $
 
 Prove that $ f(n) $ is the closest integer to $ \frac{\phi^n}{\sqrt{5}} $, where $ \phi = \frac{(1 + \sqrt{5})}{2} $
 

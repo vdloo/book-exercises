@@ -1,0 +1,105 @@
+\documentclass{article}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\usetikzlibrary{positioning}
+\usepackage{atbegshi}
+\AtBeginDocument{\AtBeginShipoutNext{\AtBeginShipoutDiscard}}
+\tikzset{
+	treenode/.style = {align=center, inner sep=2pt, text centered, rectangle, black, font=\sffamily\bfseries, draw=black, fill=white},
+	endright/.style = {draw=red},
+	endleft/.style  = {draw=blue},
+}
+
+\begin{document}
+\hspace*{-4em}\
+\begin{tikzpicture}[
+	level 1/.style={sibling distance = 3cm},
+	level 3/.style={sibling distance = 9cm},
+	level 4/.style={sibling distance = 2cm},
+	->,
+	>=stealth',
+]
+\node {cc 11 5}
+	child{ node {cc 11 4} 
+			child{ node {cc 11 3} 
+				child{ node {cc 11 2} 
+					child{ node (a10) [left = 2cm] {cc 11 1}
+						child{ node [left=of a10][endleft] {cc 11 0}}
+						child{ node (a9) [below=of a10] {cc 10 1}
+							child{ node [left=of a9][endleft] {cc 10 0}}
+							child{ node (a8) [below=of a9] {cc 9 1}
+								child{ node [left=of a8][endleft] {cc 9 0}}
+								child{ node (a7) [below=of a8] {cc 8 1}
+									child{ node [left=of a7][endleft] {cc 8 0}}
+									child{ node (a6) [below=of a7] {cc 7 1}
+										child{ node [left=of a6][endleft] {cc 7 0}}
+										child{ node (a5) [below=of a6] {cc 6 1}
+											child{ node [left=of a5][endleft] {cc 6 0}}
+											child{ node (a4) [below=of a5] {cc 5 1}
+												child{ node [left=of a4][endleft] {cc 5 0}}
+												child{ node (a3) [below=of a4] {cc 4 1}
+													child{ node [left=of a3][endleft] {cc 4 0}}
+													child{ node (a2) [below=of a3] {cc 3 1}
+														child{ node [left=of a2][endleft] {cc 3 0}}
+														child{ node (a1) [below=of a2] {cc 2 1}
+															child{ node [left=of a1][endleft] {cc 2 0}}
+															child{ node [below=of a1] {cc 1 1}
+																child{ node [endleft] {cc 1 0}}
+																child{ node [endright] {cc 0 1}}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+					child{ node {cc 6 2}
+						child{ node (b5) {cc 6 1}
+							child{ node [left=of b5][endleft] {cc 6 0}}
+							child{ node (b4) [below=of b5] {cc 5 1}
+								child{ node [left=of b4] [endleft] {cc 5 0}}
+								child{ node (b3) [below=of b4] {cc 4 1}
+									child{ node [left=of b3] [endleft] {cc 4 0}}
+									child{ node (b2) [below=of b3] {cc 3 1}
+										child{ node [left=of b2] [endleft] {cc 3 0}}
+										child{ node (b1) [below=of b2] {cc 2 1}
+											child{ node [left=of b1] [endleft] {cc 2 0}}
+											child{ node [below=of b1] {cc 1 1}
+												child{ node [endleft] {cc 1 0}}
+												child{ node [endright] {cc 0 1}}
+											}
+										}
+									}
+								}
+							}
+						}
+						child{ node [right = 1cm] {cc 1 2}
+							child{ node {cc 1 1}
+								child{ node [endleft] {cc 1 0}}
+								child{ node [endright] {cc 0 1}}
+							}
+							child{ node [endright] {cc -4 2}}
+						}
+					}
+				}
+				child{ node {cc 1 3} 
+					child{ node {cc 1 2}
+						child{ node {cc 1 1}
+							child{ node [endleft] {cc 1 0}}
+							child{ node [endright] {cc 0 1}}
+						}
+						child{ node [endright] {cc -4 2}}
+					}
+					child{ node [endright] {cc -9 3}}
+				}
+			}
+			child{ node [endright] {cc -14 4}}
+	}
+	child{ node [endright] {cc -39 5}}
+; 
+\end{tikzpicture}
+\end{document}

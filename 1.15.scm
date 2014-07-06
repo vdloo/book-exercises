@@ -19,3 +19,5 @@
 ; (p (p 0.9758465331678772))
 ; (p -.7895631144708228)
 ; -.39980345741334
+
+; Every time the input angle is tripled, sine will be called one extra time. This means that both the order of growth in space and number of steps is theta of log(n). 

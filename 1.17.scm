@@ -24,14 +24,14 @@
   (div a 2)
 )
 
-; mul 4 4 16
-(mul 4 4)
+(define (iseven n) (= (remainder n 2) 0))
 
-; double 8 16
-(double 8)
+(define (fast-mul a b)
+  (cond ((= b 0) 0)
+        ((= b 1) a)
+        ((iseven b) (double (fast-mul a (halve b))))
+        (else (+ a (fast-mul a (- b 1))))
+  )
+)
 
-; div 16 4 4
-(div 20 4)
-
-; halve 16 2 8
-(halve 16)
+(fast-mul 100000 100000)

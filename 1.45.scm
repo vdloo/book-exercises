@@ -25,10 +25,14 @@
   (lambda (x) (average x (f x)))
 )
 
+(define (compose f g)
+    (lambda (x) (f (g x)))
+)
+
 (define (repeated f n)
   (if (> n 1)
-    (repeated (lambda (x) (f (f x))) (- n 1))
-    (lambda (x) (f x))
+    (compose f (repeated f (- n 1)))
+    f
   )
 )
 
@@ -86,20 +90,5 @@
 (nth-root 10000000000000 13) ; 10
 (nth-root 100000000000000 14) ; 10
 (nth-root 1000000000000000 15) ; 10
-(nth-root 10000000000000000 16) ; 10 ; it's supposed to break here but it doesn't
-(nth-root 100000000000000000 17) ; 10
-(nth-root 1000000000000000000 18) ; 10
-(nth-root 10000000000000000000 19) ; 10
-(nth-root 100000000000000000000 20) ; 10
-(nth-root 1000000000000000000000 21) ; 10
-(nth-root 10000000000000000000000 22) ; 10
-(nth-root 100000000000000000000000 23) ; 10
-(nth-root 1000000000000000000000000 24) ; 10
-(nth-root 10000000000000000000000000 25) ; 10
-(nth-root 100000000000000000000000000 26) ; 10
-(nth-root 1000000000000000000000000000 27) ; 10
-(nth-root 10000000000000000000000000000 28) ; 10
-(nth-root 100000000000000000000000000000 29) ; 10
-(nth-root 1000000000000000000000000000000 30) ; 10
-(nth-root 10000000000000000000000000000000 31) ; 10
-; (nth-root 100000000000000000000000000000000 32) ; ; infinite loop, fails to converge with three average damps
+;(nth-root 10000000000000000 16) ; infinite loop, fails to converge with three average damps
+

@@ -35,13 +35,9 @@
   (print-point (end-segment s)))
 
 (define (point-compare a b)
-  (or 
-    (and 
-      (= (x-point a) (x-point b))
-      (= (y-point a) (y-point b))
-    (and 
-      (= (y-point a) (x-point b))
-      (= (x-point a) (y-point b))))))
+  (and
+    (= (x-point a) (x-point b))
+    (= (y-point a) (y-point b))))
 
 (define (touch a b)
   (+ 
@@ -56,13 +52,13 @@
      (touch c d) 
      (touch d a) 
      (touch a c)
-     (touch b d)) 9))
+     (touch b d)) 4))
 
 (define (make-rectangle seg-a seg-b seg-c seg-d)
   (if (check-if-solid-rectangle seg-a seg-b seg-c seg-d)
     (cons 
-      (cons seg-a seg-b)    ; sides
-      (cons seg-c seg-d))   ; top and bottom
+      (cons seg-a seg-b)    ; left and bottom
+      (cons seg-c seg-d))   ; right and top
     (begin 
       (newline)
       (display "Not a valid rectangle, points don't connect")
@@ -84,13 +80,13 @@
 
 
 (define point-a (make-point 0 0))
-(define point-b (make-point 0 0))
+(define point-b (make-point 0 2))
 (define segment-a (make-segment point-a point-b))
 (define point-c (make-point 0 2))
-(define point-d (make-point 0 0))
+(define point-d (make-point 2 2))
 (define segment-b (make-segment point-c point-d))
 (define point-e (make-point 2 2))
-(define point-f (make-point 0 0))
+(define point-f (make-point 2 0))
 (define segment-c (make-segment point-e point-f))
 (define point-g (make-point 2 0))
 (define point-h (make-point 0 0))
@@ -109,7 +105,7 @@
                         (x-point (end-segment s)))))
         (ydist (abs (- (y-point (start-segment s))
                         (y-point (end-segment s))))))
-        (sqrt (+ (exp xdist) (exp ydist)))))
+        (sqrt (+ (expt xdist 2) (expt ydist 2)))))
 
 (define (get-rectangle-perimeter r)
   (+ 
@@ -135,3 +131,25 @@
 (get-rectangle-area r)
 
 ; Re-implement the representation for rectangles to see if the abstraction barriers are suitable (perimeter and area should still work)
+; Note: better would be to abstract get-rectangle-perimeter and get-rectangle-segment to the point where they can also handle a rectangle
+; object where only one horizontal and one vertical segment is stored, the current implementation also allows for the shape to be a 
+; trapezoid. But for the sake of this exercise I found switching up the sides and top/bottom enough to demonstrate the abstraction barriers.
+(define (make-rectangle seg-a seg-b seg-c seg-d)
+  (if (check-if-solid-rectangle seg-a seg-b seg-c seg-d)
+    (cons 
+      (cons seg-c seg-d)    ; top and bottom
+      (cons seg-a seg-b))   ; sides
+    (begin 
+      (newline)
+      (display "Not a valid rectangle, points don't connect")
+      #f)))
+
+; Create and print rectangle in a plane, calculate primeter and area
+(define r (make-rectangle 
+  segment-a
+  segment-b
+  segment-c
+  segment-d))
+(print-rectangle r)
+(get-rectangle-perimeter r)
+(get-rectangle-area r)

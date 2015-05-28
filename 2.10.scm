@@ -5,7 +5,7 @@
 (define interval1 (make-interval 0 0))
 (define interval2 (make-interval 30 50))
 
-(define (mul-interval x Y)
+(define (mul-interval x y)
   (let ((p1 (* (lower-bound x) (lower-bound y)))
         (p2 (* (lower-bound x) (upper-bound y)))
         (p3 (* (upper-bound x) (lower-bound y)))

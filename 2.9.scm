@@ -13,7 +13,7 @@
   (make-interval (- (lower-bound x) (lower-bound y))
                  (- (upper-bound x) (upper-bound y))))
 
-(define (mul-interval x Y)
+(define (mul-interval x y)
   (let ((p1 (* (lower-bound x) (lower-bound y)))
         (p2 (* (lower-bound x) (upper-bound y)))
         (p3 (* (upper-bound x) (lower-bound y)))

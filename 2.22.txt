@@ -1,0 +1,7 @@
+iterating over the items results in a reversed list because cons wraps
+a pair around the provided arguments, so what you need to do in order to
+the type of list that you want is to either reverse the resulting (nested)
+pairs and cons an end of list marker on top of that or every time you want
+to add something to the list, iterate all the way down to the last pair
+and replace that with a cons with that pair and the new pair and then add
+an end of list marker.

@@ -1,0 +1,6 @@
+# vim
+*.swo
+*.swp
+
+# gcc
+a.out

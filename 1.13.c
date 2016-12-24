@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <time.h>
 
 void paint_histogram(int *word_lengths)
@@ -18,7 +19,7 @@ void paint_histogram(int *word_lengths)
 }
 
 /* count digits, white space, others */
-main()
+int main(void)
 {
 	int c, i, chars_in_word = 0;
 	int word_lengths[80];
@@ -47,4 +48,5 @@ main()
 			++chars_in_word;
 		}
 	}
+    return 0;
 }

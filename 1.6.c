@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-main()
+int main(void)
 {
     int i = getchar() != EOF;
     if (i == 1) {
@@ -11,4 +11,5 @@ main()
 	/* it does equal EOF if you ctrl + d */
         printf("getchar() equals EOF\n");
     }
+    return 0;
 }

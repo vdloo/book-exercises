@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-main()
+int main(void)
 {
     printf("Printing alert (bell) character \a.\n");
     printf("Printing backspace character \b.\n");
@@ -14,4 +14,5 @@ main()
     printf("Printing octal number %o.\n", '\012');
     printf("Printing hex number %X.\n", '\x12');
     printf("Done!\n");
+    return 0;
 }

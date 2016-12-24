@@ -2,7 +2,8 @@
 
 /* print value of EOF */
 
-main()
+int main(void)
 {
     printf("EOF value: %d\n", EOF);
+    return 0;
 }

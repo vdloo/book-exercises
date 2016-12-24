@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-main ()
+int main (void)
 {
 	char c;
 	while((c = getchar()) != EOF) {
@@ -18,4 +18,5 @@ main ()
 				printf("%c", c);
 		}
 	}
+    return 0;
 }

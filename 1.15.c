@@ -6,7 +6,7 @@ float celcius(int fahr) {
 	return celsius;
 }
 
-main()
+int main(void)
 {
 	float fahr;
 	int lower, upper, step;
@@ -20,4 +20,5 @@ main()
 		printf("%3.0f %6.1f\n", fahr, celcius(fahr));
 		fahr = fahr + step;
 	}
+    return 0;
 }

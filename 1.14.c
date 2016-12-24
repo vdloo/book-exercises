@@ -58,7 +58,7 @@ void paint_histogram(int *ndigit, int nwhite, int nother)
 }
 
 /* count digits, white space, others */
-main()
+int main(void)
 {
 	int c, i, nwhite, nother;
 	int ndigit[10];
@@ -80,4 +80,5 @@ main()
 
 	print_header(ndigit, nwhite, nother);
 	paint_histogram(ndigit, nwhite, nother);
+    return 0;
 }

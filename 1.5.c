@@ -26,8 +26,9 @@ void print_table()
     }
 }
 
-main()
+int main(void)
 {
     print_heading();
     print_table();
+    return 0;
 }

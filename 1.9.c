@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-main ()
+int main (void)
 {
 	char prev_c;
 	char cur_c = ' ';
@@ -12,4 +12,5 @@ main ()
 		}
 		prev_c = cur_c;
 	}
+    return 0;
 }

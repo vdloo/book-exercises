@@ -12,7 +12,7 @@ int check_if_whitespace(char c) {
 	}
 }
 
-main()
+int main(void)
 {
 	int cur_c, cur_is_whitespace, prev_was_whitespace = 1;
 	while ((cur_c = getchar()) != EOF) {
@@ -27,4 +27,5 @@ main()
 		}
 		prev_was_whitespace = cur_is_whitespace;
 	}
+    return 0;
 }

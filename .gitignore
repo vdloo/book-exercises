@@ -4,3 +4,9 @@
 
 # gcc
 a.out
+
+# pycharm
+*.idea
+
+# python
+*.pyc

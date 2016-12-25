@@ -24,7 +24,8 @@ void print_entabbed(char s[], int lim)
     int i, j, to_next_tabstop, w = 0, c = 0;
     for (i = 0; i < lim; ++i) {
         if (s[i] == '\t') {
-            w += TABSTOP;
+            to_next_tabstop = TABSTOP - ((c + w) % TABSTOP);
+            w += to_next_tabstop;
         } else if (s[i] == ' ') {
             w++;
         } else {

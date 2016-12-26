@@ -41,14 +41,14 @@ int main(void)
                 break;
             case COMMENT:
                 /* From the comment state we can only exit back into the normal 
-		 * state. We can not have come from the comment single quote 
-		 * state and we could also not have come from the double quote state 
-		 * since those both do not allow entering the comment state. */
+                 * state. We can not have come from the comment single quote 
+                 * state and we could also not have come from the double quote state 
+                 * since those both do not allow entering the comment state. */
                 assert(prevstate == NORMAL);
                 if (prevchar == '*' && c == '/') {
                     change_state(prevstate);
-		    prevchar = '\0';
-		    c = '\0';
+                    prevchar = '\0';
+                    c = '\0';
                 }
                 break;
             case SINGLEQ:
@@ -59,23 +59,23 @@ int main(void)
                  * definition only one char long, we should also never enter 
                  * the comment state.*/
                 assert(prevstate == NORMAL);
-		if (c == '\'') {
-		    if (prevchar != '\\' || prevprevchar == '\\') {
+                if (c == '\'') {
+                    if (prevchar != '\\' || prevprevchar == '\\') {
                         change_state(NORMAL);
-		    }
-		}
+                    }
+                }
                 break;
             case DOUBLEQ:
                 /* From the double quote state we can only revert back into the 
-		 * normal state since we can't enter a comment state from within
-		 * a multi-line comment. Additionally, we can not have come from 
-		 * the single quote state. */
-                assert(prevstate != SINGLEQ);
-		if (c == '"') {
-		    if (prevchar != '\\' || prevprevchar == '\\') {
+                 * normal state since we can't enter a comment state from within
+                 * a multi-line comment. Additionally, we can not have come from 
+                 * the single quote state. */
+                assert(prevstate == NORMAL);
+                if (c == '"') {
+                    if (prevchar != '\\' || prevprevchar == '\\') {
                         change_state(NORMAL);
-		    }
-		}
+                    }
+                }
                 break;
         }
         /* print the previous character if not in comment */

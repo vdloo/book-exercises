@@ -9,6 +9,10 @@
 int prevstate = NORMAL;
 int state = NORMAL;
 
+int c;
+int prevprevchar = '\0';
+int prevchar = '\0';
+
 void change_state(int new_state)
 {
     extern int prevstate;
@@ -17,15 +21,26 @@ void change_state(int new_state)
     state = new_state;
 }
 
+int detect_state_change(char delimiter)
+{
+    extern int c;
+    extern int prevprevchar;
+    extern int prevchar;
+    if (c == delimiter) {
+        if (prevchar != '\\' || prevprevchar == '\\') {
+            return 1;
+        }
+    }
+    return 0;
+}
 
 int main(void)
 {
     /* Simple state machine for parsing multi-line comments from C code */
-    extern int prevstate;
-    extern int state;
-    int c;
-    int prevprevchar = '\0';
-    int prevchar = '\0';
+    extern int c;
+    extern int prevprevchar;
+    extern int prevchar;
+
     while ((c = getchar()) != EOF) {
         switch(state) {
             case NORMAL:
@@ -33,9 +48,9 @@ int main(void)
                  * the single quote state and the double quote state. */
                 if (prevprevchar != '\\' && prevchar == '/' && c == '*') {
                     change_state(COMMENT);
-                } else if (prevchar != '\\' && c == '\'') {
+                } else if (detect_state_change('\'')) {
                     change_state(SINGLEQ);
-                } else if (prevchar != '\\' && c == '"') {
+                } else if (detect_state_change('"')) {
                     change_state(DOUBLEQ);
                 }
                 break;
@@ -59,10 +74,8 @@ int main(void)
                  * definition only one char long, we should also never enter 
                  * the comment state.*/
                 assert(prevstate == NORMAL);
-                if (c == '\'') {
-                    if (prevchar != '\\' || prevprevchar == '\\') {
-                        change_state(NORMAL);
-                    }
+                if (detect_state_change('\'')) {
+                    change_state(NORMAL);
                 }
                 break;
             case DOUBLEQ:
@@ -71,10 +84,8 @@ int main(void)
                  * a multi-line comment. Additionally, we can not have come from 
                  * the single quote state. */
                 assert(prevstate == NORMAL);
-                if (c == '"') {
-                    if (prevchar != '\\' || prevprevchar == '\\') {
-                        change_state(NORMAL);
-                    }
+                if (detect_state_change('"')) {
+                    change_state(NORMAL);
                 }
                 break;
         }

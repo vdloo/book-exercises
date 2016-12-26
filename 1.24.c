@@ -19,6 +19,10 @@ int state[MAXNESTED] = {'\0'};
 /* mark the line of every state change */
 int enterline[MAXNESTED] = {'\0'};
 
+int c;
+int prevprevchar = '\0';
+int prevchar = '\0';
+
 const char *names[7] = {
     "normal text", "comment", "single quotes",
     "double quotes", "parenthesis", "brackets",
@@ -72,19 +76,43 @@ void exit_state()
     nest_level--;
 }
 
-
-int main(void)
+int detect_entering_comment()
 {
-    /* Simple state machine to check a C program for rudimentary syntax errors */
-    extern int nest_level;
-    extern int lines;
-    extern const char *names[7];
-    int c;
-    int prevprevchar = '\0';
-    int prevchar = '\0';
+    extern int c;
+    extern int prevprevchar;
+    extern int prevchar;
+    return (prevprevchar != '\\' && prevchar == '/' && c == '*');
+}
 
-    set_initial_state();
+int detect_leaving_comment()
+{
+    return (prevchar == '*' && c == '/');
+}
 
+int detect_state_change(char delimiter)
+{
+    extern int c;
+    extern int prevprevchar;
+    extern int prevchar;
+    if (c == delimiter) {
+        if (prevchar != '\\' || prevprevchar == '\\') {
+            return 1;
+        }
+    }
+    return 0;
+}
+
+void shift_read_character()
+{
+    extern int c;
+    extern int prevprevchar;
+    extern int prevchar;
+    prevprevchar = prevchar;
+    prevchar = c;
+}
+
+void initialize_state_machine()
+{
     while ((c = getchar()) != EOF) {
         if (c == '\n') {
             lines++;
@@ -93,11 +121,11 @@ int main(void)
             case NORMAL:
                 /* From the normal state we can enter the comment state, 
                  * the single quote state and the double quote state. */
-                if (prevprevchar != '\\' && prevchar == '/' && c == '*') {
+                if (detect_entering_comment()) {
                     enter_state(COMMENT);
-                } else if (prevchar != '\\' && c == '\'') {
+                } else if (detect_state_change('\'')) {
                     enter_state(SINGLEQ);
-                } else if (prevchar != '\\' && c == '"') {
+                } else if (detect_state_change('"')) {
                     enter_state(DOUBLEQ);
                 }
                 break;
@@ -106,7 +134,7 @@ int main(void)
                  * state. We can not have come from the comment single quote 
                  * state and we could also not have come from the double quote state 
                  * since those both do not allow entering the comment state. */
-                if (prevchar == '*' && c == '/') {
+                if (detect_leaving_comment()) {
                     exit_state();
                     if (get_current_state() != NORMAL) {
                         fprintf(
@@ -125,17 +153,15 @@ int main(void)
                  * change the state. And because character constants are by 
                  * definition only one char long, we should also never enter 
                  * the comment state.*/
-                if (c == '\'') {
-                    if (prevchar != '\\' || prevprevchar == '\\') {
-                        exit_state();
-                        if (get_current_state() != NORMAL) {
-                            fprintf(
-                                stderr, 
-                                "Could not parse single quotes at line %d\n",
-                                lines
-                            );
-                            exit(150);
-                        }
+                if (detect_state_change('\'')) {
+                    exit_state();
+                    if (get_current_state() != NORMAL) {
+                        fprintf(
+                            stderr, 
+                            "Could not parse single quotes at line %d\n",
+                            lines
+                        );
+                        exit(151);
                     }
                 }
                 break;
@@ -144,24 +170,28 @@ int main(void)
                  * normal state since we can't enter a comment state from within
                  * a multi-line comment. Additionally, we can not have come from 
                  * the single quote state. */
-                if (c == '"') {
-                    if (prevchar != '\\' || prevprevchar == '\\') {
-                        exit_state();
-                        if (get_current_state() != NORMAL) {
-                            fprintf(
-                                stderr, 
-                                "Could not parse double quotes at %d\n",
-                                lines
-                            );
-                            exit(150);
-                        }
+                if (detect_state_change('"')) {
+                    exit_state();
+                    if (get_current_state() != NORMAL) {
+                        fprintf(
+                            stderr, 
+                            "Could not parse double quotes at %d\n",
+                            lines
+                        );
+                        exit(152);
                     }
                 }
                 break;
         }
-        prevprevchar = prevchar;
-        prevchar = c;
+        shift_read_character();
     }
+}
+
+void trace_unbalanced()
+{
+    extern int nest_level;
+    extern int lines;
+    extern const char *names[7];
     if (nest_level != 0) {
         fprintf(
             stderr, 
@@ -169,6 +199,15 @@ int main(void)
             names[get_current_state()],
             get_line_of_state(nest_level)
         );
+        exit(153);
     }
+}
+
+int main(void)
+{
+    /* Simple state machine to check a C program for rudimentary syntax errors */
+    set_initial_state();
+    initialize_state_machine();
+    trace_unbalanced();
     return 0;
 }

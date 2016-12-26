@@ -139,7 +139,7 @@ int main(void)
 #include <stdio.h>
 int main(void)
 {
-    char *a = "this\\\" is a char array";
+    char *a = "this\\" is a char array";
     /* Simple state machine for parsing multi-line comments from C code */
     return 0;
 }
@@ -148,7 +148,7 @@ int main(void)
 #include <stdio.h>
 int main(void)
 {
-    char *a = "this\\\" is a char array";
+    char *a = "this\\" is a char array";
     
     return 0;
 }
@@ -186,7 +186,7 @@ int main(void)
 int main(void)
 {
     /* this is a char constant single quote */
-    char a = '\\\'';
+    char a = '\\'';
     /* Simple state machine for parsing multi-line comments from C code */
     return 0;
 }
@@ -196,7 +196,7 @@ int main(void)
 int main(void)
 {
     
-    char a = '\\\'';
+    char a = '\\'';
     
     return 0;
 }

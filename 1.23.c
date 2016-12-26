@@ -23,9 +23,9 @@ int main(void)
     /* Simple state machine for parsing multi-line comments from C code */
     extern int prevstate;
     extern int state;
-    char c;
-    char prevprevchar = '\0';
-    char prevchar = '\0';
+    int c;
+    int prevprevchar = '\0';
+    int prevchar = '\0';
     while ((c = getchar()) != EOF) {
         switch(state) {
             case NORMAL:
@@ -47,8 +47,8 @@ int main(void)
                 assert(prevstate == NORMAL);
                 if (prevchar == '*' && c == '/') {
                     change_state(prevstate);
-                    prevchar = '\0';
-                    c = '\0';
+		    prevchar = '\0';
+		    c = '\0';
                 }
                 break;
             case SINGLEQ:
@@ -59,9 +59,11 @@ int main(void)
                  * definition only one char long, we should also never enter 
                  * the comment state.*/
                 assert(prevstate == NORMAL);
-                if (prevchar != '\\' && c == '\'') {
-                    change_state(NORMAL);
-                }
+		if (c == '\'') {
+		    if (prevchar != '\\' || prevprevchar == '\\') {
+                        change_state(NORMAL);
+		    }
+		}
                 break;
             case DOUBLEQ:
                 /* From the double quote state we can only revert back into the 
@@ -69,9 +71,11 @@ int main(void)
 		 * a multi-line comment. Additionally, we can not have come from 
 		 * the single quote state. */
                 assert(prevstate != SINGLEQ);
-		if (prevchar != '\\' && c == '"') {
-                    change_state(NORMAL);
-                }
+		if (c == '"') {
+		    if (prevchar != '\\' || prevprevchar == '\\') {
+                        change_state(NORMAL);
+		    }
+		}
                 break;
         }
         /* print the previous character if not in comment */

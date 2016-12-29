@@ -67,12 +67,42 @@ void enter_state(int new_state)
     enterline[nest_level] = lines + 1;
 }
 
+int state_in_stack(int state_to_check)
+{
+    extern int state[MAXNESTED];
+	int i;
+	for (i = 0; i < MAXNESTED; i++) {
+		if (state[i] == state_to_check) {
+			return 1;
+		}
+	}
+	return 0;
+}
+
 void exit_state(int state_to_exit)
 {
     /* Drop a state from the stack */
     extern int state[MAXNESTED];
     extern int nest_level;
-	/* todo: throw error when state_to_exit not in stack */
+	if (get_current_state() != state_to_exit) {
+		fprintf(
+			stderr, 
+			"Expected to be exiting state %s but was actually exiting %s at line %d\n",
+            names[state_to_exit],
+            names[get_current_state()],
+			lines + 1
+		);
+		exit(151);
+	}
+	if (!state_in_stack(state_to_exit)) {
+		fprintf(
+			stderr, 
+			"Closing unstarted %s at line %d\n",
+            names[state_to_exit],
+			lines + 1
+		);
+		exit(152);
+	}
     state[nest_level] = '\0';
     nest_level--;
 }
@@ -153,7 +183,7 @@ void handle_comment()
 				"Could not parse comment at line %d\n",
 				lines
 			);
-			exit(150);
+			exit(153);
 		}
 	}
 }
@@ -229,7 +259,7 @@ void trace_unbalanced()
             names[get_current_state()],
             get_line_of_state(nest_level)
         );
-        exit(156);
+        exit(154);
     } else {
 		printf("It all looks ok!\n");
 	}

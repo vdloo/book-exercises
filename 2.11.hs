@@ -1,0 +1,136 @@
+--- Exercise 2.11
+--- Prove all (other) parts from Theorem 2.10
+--- 
+--- 1. P ≡ ¬ ¬ P (law of double negation)
+--- 
+--- P ≡ ¬ ¬ P
+--- t t t f t
+--- f f f t f
+---
+--- 2. P ∧ P ≡ P; P ∨ P ≡ P (laws of idempotence)
+---
+--- P ∧ P ≡ P
+--- t t t t t
+--- f f f t f
+---
+--- P ∨ P ≡ P 
+--- t t t t t
+--- f f f t f
+---
+--- 3. (P ⇒ Q) ≡ ¬ P ∨ Q; ¬ (P ⇒ Q) ≡ P ∧ ¬ Q
+---
+--- (P ⇒ Q) ≡ ¬ P ∨ Q;
+---  t t t  t f t t t
+---  t f f  t f t f f
+---  f t t  t t f t t
+---  f t f  t t f t f
+---
+--- ¬ (P ⇒ Q) ≡ P ∧ ¬ Q
+--- f  t t t  t t f f t
+--- t  t f f  t t t t f
+--- f  f t t  t f f f t
+--- f  f t f  t f f t f
+---
+--- 4. (¬ P ⇒ ¬ Q) ≡ (Q ⇒ P);
+---    (P ⇒ ¬ Q) ≡ (Q ⇒ ¬ P);
+---    (¬ P ⇒ Q) ≡ (¬ Q ⇒ P) (laws of contraposition)
+---
+--- (¬ P ⇒ ¬ Q) ≡ (Q ⇒ P)
+---  f t t f t  t  t t t
+---  f t t t f  t  f t t
+---  t f f f t  t  t f f
+---  t f t t f  t  f t f
+---
+--- (P ⇒ ¬ Q) ≡ (Q ⇒ ¬ P)
+---  t f f t  t  t f f t
+---  t t t f  t  f t f t
+---  f t f t  t  t t t f
+---  f t t f  t  f t t f
+---
+--- (¬ P ⇒ Q) ≡ (¬ Q ⇒ P) 
+---  f t t t  t  f t t t
+---  f t t f  t  t f t t
+---  t f t t  t  f t t f
+---  t f f f  t  t f f f
+---
+--- 5. (P ⇔ Q) ≡ ((P ⇒ Q) ∧ (Q ⇒ P)) ≡ ((P ∧ Q) ∨ (¬ P ∧ ¬ Q))
+---
+--- (P ⇔ Q) ≡ ((P ⇒ Q) ∧ (Q ⇒ P)) ≡ ((P ∧ Q) ∨ (¬ P ∧ ¬ Q))
+---  t t t  t   t t t  t  t t t   t   t t t  t  f t f f t
+---  t f f  t   t f f  f  f t t   t   t f f  f  f t f t f
+---  f f t  t   f t t  f  t f f   t   f f t  f  t f f f t
+---  f t f  t   f t f  t  f t f   t   f f f  t  t f t t f
+---
+--- 6. P ∧ Q ≡ Q ∧ P; P ∨ Q ≡ Q ∨ P (laws of commutativity)
+---
+--- P ∧ Q ≡ Q ∧ P
+--- t t t t t t t
+--- t f f t f f t
+--- f f t t t f f
+--- f f f t f f f
+---
+--- P ∨ Q ≡ Q ∨ P 
+--- t t t t t t t
+--- t t f t f t t
+--- f t t t t t f
+--- f f f t f f f
+---
+--- 7. ¬ (P ∧ Q) ≡ ¬ P ∨ ¬ Q; ¬ (P ∨ Q) ≡ ¬ P ∧ ¬ Q (DeMorgan laws)
+---
+--- ¬ (P ∧ Q) ≡ ¬ P ∨ ¬ Q
+--- f  t t t  t f t f f t
+--- t  t f f  t f t t t f
+--- t  f f t  t t f t f t
+--- t  f f f  t t f t t f
+---
+--- ¬ (P ∨ Q) ≡ ¬ P ∧ ¬ Q 
+--- f  t t t  t f t f f t
+--- f  t t f  t f t f t f
+--- f  f t t  t t f f f t
+--- t  f f f  t t f t t f
+---
+--- 8. P ∧ (Q ∧ R) ≡ (P ∧ Q) ∧ R; P ∨ (Q ∨ R) ≡ (P ∨ Q) ∨ R) (laws of associativity)
+--- 
+--- P ∧ (Q ∧ R) ≡ (P ∧ Q) ∧ R
+--- t t  t t t  t  t t t  t t
+--- t f  t f f  t  t t t  f f
+--- t f  f f t  t  t f f  f t
+--- t f  f f f  t  t f f  f f
+--- f f  t t t  t  f f t  f t
+--- f f  t f f  t  f f t  f f
+--- f f  f f t  t  f f f  f t
+--- f f  f f f  t  f f f  f f
+---
+---
+--- P ∨ (Q ∨ R) ≡ (P ∨ Q) ∨ R)
+--- t t  t t t  t  t t t  t t
+--- t t  t t f  t  t t t  t f
+--- t t  f t t  t  t t f  t t
+--- t t  f f f  t  t t f  t f
+--- f t  t t t  t  f t t  t t
+--- f t  t t f  t  f t t  t f
+--- f t  f t t  t  f f f  t t
+--- f f  f f f  t  f f f  f f
+---
+--- 9. P ∧ (Q ∨ R) ≡ (P ∧ Q) ∨ (P ∧ R); P ∨ (Q ∧ R) ≡ (P ∨ Q) ∧ (P ∨ R) (distribution laws)
+---
+--- P ∧ (Q ∨ R) ≡ (P ∧ Q) ∨ (P ∧ R)
+--- t t  t t t  t  t t t  t  t t t
+--- t t  t t f  t  t t t  t  t f f
+--- t t  f t t  t  t f f  t  t t t
+--- t f  f f f  t  t f f  f  t f f
+--- f f  t t t  t  f f t  f  f f t
+--- f f  t t f  t  f f t  f  f f f
+--- f f  f t t  t  f f f  f  f f t
+--- f f  f f f  t  f f f  f  f f f
+---
+--- P ∨ (Q ∧ R) ≡ (P ∨ Q) ∧ (P ∨ R) 
+--- t t  t t t  t  t t t  t  t t t
+--- t t  t f f  t  t t t  t  t t f
+--- t t  f f t  t  t t f  t  t t t
+--- t t  f f f  t  t t f  t  t t f
+--- f t  t t t  t  f t t  t  f t t
+--- f f  t f f  t  f t t  f  f f f
+--- f f  f f t  t  f f f  f  f t t
+--- f f  f f f  t  f f f  f  f f f
+

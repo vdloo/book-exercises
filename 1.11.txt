@@ -1,0 +1,5 @@
+By piping strings with no whitespace and mixed whitespace sequences into
+the program and asserting if the expected number of words is correct. The
+kinds of inputs that would be the most likely to uncover bugs are those
+without whitespaces or with whitespaces at the beginning or end of the
+input.

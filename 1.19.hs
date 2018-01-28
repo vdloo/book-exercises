@@ -1,0 +1,74 @@
+--- Exercise 1.19
+--- Find the types of the following predefined functions and supply them 
+--- with arguments of the expected types and guess what these functions do.
+---
+--- 1. head
+--- Prelude> :t head
+--- head :: [a] -> a
+---
+--- Prelude> head ['a', 'b']
+--- 'a'
+---
+--- returns the first element from a list
+---
+--- 2. last
+--- Prelude> :t last
+--- last :: [a] -> a
+---
+--- Prelude> last ['a', 'b', 'c']
+--- 'c'
+---
+--- returns the last element from a list
+---
+--- 3. init
+---
+--- Prelude> :t init
+--- init :: [a] -> [a]
+---
+--- Prelude> init ['a', 'b', 'c']
+--- "ab"
+---
+--- returns the list without the last element
+---
+--- 4. fst
+---
+--- Prelude> :t fst 
+--- fst :: (a, b) -> a
+---
+--- Prelude> fst ('a', 'b')
+--- 'a'
+---
+--- returns the first element from a tuple
+---
+--- 5. (++)
+---
+--- Prelude> :t (++)
+--- (++) :: [a] -> [a] -> [a]
+---
+--- Prelude> (++) ["a"] ["b"]
+--- ["a","b"]
+---
+--- concatenate the first list with the second list
+--- 
+--- 6. flip
+---
+--- Prelude> :t flip
+--- flip :: (a -> b -> c) -> b -> a -> c
+---
+--- Prelude> (\x y -> (x, y)) 1 2
+--- (1,2)
+--- Prelude> flip (\x y -> (x, y)) 1 2
+--- (2,1)
+---
+--- flips the arguments and evaluates the function with them
+---
+--- 7. flip (++)
+---
+--- Prelude> :t flip (++)
+--- flip (++) :: [a] -> [a] -> [a]
+---
+--- Prelude> flip (++) ['a', 'b'] ['c', 'd']
+--- "cdab"
+---
+--- concatenate the second list with the first list
+

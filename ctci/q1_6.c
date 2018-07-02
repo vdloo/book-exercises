@@ -25,7 +25,6 @@
 */
 
 
-
 char * simple_compress(char str[])
 {
     size_t buf_len = strlen(str);

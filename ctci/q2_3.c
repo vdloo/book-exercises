@@ -71,7 +71,7 @@ int sum_range(int n){
     return result;
 }
 
- void remove_kth_but_can_only_access_kth(node *node_pointer, int k) {
+void remove_kth_but_can_only_access_kth(node *node_pointer, int k) {
     node *next_pointer;
     int i;
     for (i = 0; i < k; i++) {

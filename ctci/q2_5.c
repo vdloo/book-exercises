@@ -6,7 +6,7 @@
 
 /* Add two linked lists where each node represents
  * one digit to a new linked list where each node
- * also represents one digital. Do that for the
+ * also represents one digit. Do that for the
  * the numbers represented in the linked list both
  * in forward and backward order.
  * I.e.: 717 + 395 = 912 in forward order

@@ -90,19 +90,6 @@ node *add_right(node *node_pointer, int value) {
     return node_pointer->next;
 }
 
-node *create_linked_list(int nodes) {
-    /* Create a double linked list by creating a tail
-     * node with a zero value and then creating a specified amount
-     * of nodes with an incremented value that will point to the
-     * latest created node and the previous node. */
-    int i, length = nodes;
-    node *next_pointer = create_node(0);
-    for (i = 1; i < length; i++) {
-        next_pointer = add_left(next_pointer, i);
-    }
-    return next_pointer;
-}
-
 void print_linked_list(node *node_pointer) {
     while (node_pointer != NULL) {
         printf("%d ", node_pointer->value);

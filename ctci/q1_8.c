@@ -4,7 +4,6 @@
 /* Write an algorithm such that if an element in an MxN matrix is 0,
  * the entire row and column are set to 0. */
 
-
 /* 
 $ gcc q1_8.c && ./a.out
 0  0  0  0  0  0  0  0  0  0

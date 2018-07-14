@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <string.h>
 #include <stdlib.h>
 #include <assert.h>
 
@@ -125,6 +124,95 @@ node *pop(node **outer_stack) {
         _pop(outer_stack);
     }
     return value;
+}
+
+void roll_over(node **outer_stack, int index, int stack_count) {
+    /* Roll over any holes in inner stacks */
+    if (index < stack_count) {
+        int counter;
+        node *node_pointer = *outer_stack;
+        node *tmp;
+        counter = stack_count;
+        node_pointer = *outer_stack;
+        while (counter >= 0) {
+            if (counter == index) {
+                break;
+            }
+            counter--;
+            if (node_pointer == NULL) {
+                fprintf(
+                    stderr, "We ran out of nodes in pop at, "
+                            "someone made a programming error!\n"
+                );
+                exit(1);
+
+            }
+            node_pointer = node_pointer->next;
+        }
+        tmp = node_pointer->value;
+        while (tmp != NULL && tmp->next != NULL) {
+            tmp = tmp->next;
+        }
+        if (tmp->prev != NULL) {
+            tmp->prev->next = NULL;
+        }
+        node_pointer->next->value = _push(node_pointer->next->value, tmp->value);
+        free(tmp);
+        roll_over(outer_stack, index + 1, stack_count);
+    }
+}
+
+node *pop_at(node **outer_stack, int index) {
+    /* pop from a specific sub-stack, and roll over any nodes */
+    int stack_count = -1, counter;
+    node *node_pointer = *outer_stack;
+    while (node_pointer != NULL) {
+        stack_count++;
+        assert(node_pointer != node_pointer->next);
+        node_pointer = node_pointer->next;
+    }
+    counter = stack_count;
+    node_pointer = *outer_stack;
+    while (counter >= 0) {
+        if (counter == index) {
+            break;
+        }
+        counter--;
+        if (node_pointer == NULL) {
+            fprintf(
+                stderr, "We ran out of nodes in pop at, "
+                        "someone made a programming error!\n"
+            );
+            exit(1);
+
+        }
+        node_pointer = node_pointer->next;
+    }
+    node_pointer = pop(&node_pointer);
+    roll_over(outer_stack, index + 1, stack_count);
+    return node_pointer;
+}
+
+void test_pop_at() {
+    printf("Asserting pop at works as intended\n");
+    int i;
+    node *node_pointer;
+    node *node_under_test;
+    outer_stack = NULL;
+    for (i = 0; i < MAX_STACK_LENGTH * 10; i++) {
+        node_pointer = create_node(NULL, i);
+        outer_stack = push(outer_stack, node_pointer);
+    }
+    node_under_test = pop_at(&outer_stack, 0);
+    assert(outer_stack->value->value->count == 99);
+    assert(node_under_test->count == 9);
+    node_under_test = pop_at(&outer_stack, 0);
+    assert(outer_stack->value->value->count == 99);
+    assert(node_under_test->count == 10);
+    node_under_test = pop_at(&outer_stack, 9);
+    assert(outer_stack->value->value->count == 98);
+    node_under_test = pop_at(&outer_stack, 5);
+    assert(node_under_test->count == 61);
 }
 
 void test_pop_outer() {
@@ -407,4 +495,6 @@ int main(void) {
     test_peek();
     test_push_outer();
     test_pop_outer();
+    test_pop_at();
+    exit(0);
 }

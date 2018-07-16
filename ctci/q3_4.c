@@ -48,9 +48,7 @@ void queue_add(char value) {
 }
 
 void flush_forward_to_backward() {
-    int i;
     while (queue_forward != NULL) {
-        i++;
         push(&queue_backward, pop(&queue_forward));
     }
 }

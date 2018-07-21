@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <time.h>
 #include <stdlib.h>
 
 /* Write an algorithm such that if an element in an MxN matrix is 0,
